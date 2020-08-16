@@ -4,6 +4,7 @@
 <head>
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"></script>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 
@@ -13,21 +14,24 @@
 
 </canvas>
 <script>
+    let coordinate = {x: 0, y: 0};
     window.addEventListener('load', () => {
         resize(); // Resizes the canvas once the window loads
         document.addEventListener('mousedown', start);
         document.addEventListener('mouseup', stop);
-        window.addEventListener("mousemove", (e) => {
+        /*window.addEventListener("mousemove", (e) => {
             if (e.shiftKey)
                 paint(e, "black", 50)
             else
                 paint(e)
-        });
-        window.addEventListener("touchstart", (e) => {
-            if (e.touches.length == 1)
+        });*/
+        var mc = new Hammer(document.getElementById('board'));
+        mc.on("hammer.input", (e) => {
+            if (e.srcEvent.shiftKey) {
                 paint(e, "black", 50)
-            else
+            } else {
                 paint(e)
+            }
         });
         //window.addEventListener('resize', resize);
     })
@@ -37,11 +41,12 @@
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
     }
-    let coordinate = {x: 0, y: 0};
     let draw = false;
     position = (e) => {
-        coordinate.x = e.clientX - board.offsetLeft;
-        coordinate.y = e.clientY - board.offsetTop;
+        console.log("Start Draw!!", e.center.x ?? 0, e.center.y);
+
+        coordinate.x = e.center.x;
+        coordinate.y = e.center.y;
     }
     start = (e) => {
         draw = true;
@@ -50,9 +55,10 @@
     stop = () => {
         draw = false;
     }
-    paint = (e, color = "white", width = 15) => {
+    paint = (e, color = "white", width = 3) => {
         if (!draw) return;
         ctx.beginPath();
+        //console.log("Start Draw!!", e.center.x, e.center.y);
 
         ctx.lineWidth = width;
 
@@ -73,7 +79,7 @@
 
         // A line is traced from start
         // coordinate to this coordinate
-        ctx.lineTo(coordinate.x , coordinate.y);
+        ctx.lineTo(e.center.x , coordinate.y);
 
         // Draws the line.
         ctx.stroke();
