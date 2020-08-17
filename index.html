@@ -19,20 +19,22 @@
         resize(); // Resizes the canvas once the window loads
         document.addEventListener('mousedown', start);
         document.addEventListener('mouseup', stop);
-        /*window.addEventListener("mousemove", (e) => {
+        window.addEventListener("mousemove", (e) => {
             if (e.shiftKey)
                 paint(e, "black", 50)
             else
                 paint(e)
-        });*/
-        var mc = new Hammer(document.getElementById('board'));
-        mc.on("hammer.input", (e) => {
-            if (e.srcEvent.shiftKey) {
-                paint(e, "black", 50)
-            } else {
-                paint(e)
-            }
         });
+
+        document.addEventListener('touchstart', start);
+        document.addEventListener('touchend', stop);
+        window.addEventListener("touchmove", (e) => {
+            if (e.touches.length === 2)
+                paint(e.touches[0], "black", 50)
+            else
+                paint(e.touches[0])
+        });
+
         //window.addEventListener('resize', resize);
     })
     const board = document.getElementById("board");
@@ -43,10 +45,8 @@
     }
     let draw = false;
     position = (e) => {
-        console.log("Start Draw!!", e.center.x ?? 0, e.center.y);
-
-        coordinate.x = e.center.x;
-        coordinate.y = e.center.y;
+        coordinate.x = e.clientX - board.offsetLeft;
+        coordinate.y = e.clientY - board.offsetTop;
     }
     start = (e) => {
         draw = true;
@@ -79,7 +79,7 @@
 
         // A line is traced from start
         // coordinate to this coordinate
-        ctx.lineTo(e.center.x , coordinate.y);
+        ctx.lineTo(coordinate.x , coordinate.y);
 
         // Draws the line.
         ctx.stroke();
