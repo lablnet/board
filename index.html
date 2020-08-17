@@ -1,94 +1,15 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="UTF-8" />
-    <!-- viewport to disable zoom -->
-    <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-    <!-- for device that can't use viewport -->
-    <meta name="HandheldFriendly" content="true" />
-    <link rel="stylesheet" href="style.css">
-    <title>Board</title>
-</head>
-<body>
-
-<canvas id="board">
-
-</canvas>
-<script>
-    window.addEventListener('load', () => {
-        resize(); // Resizes the canvas once the window loads
-
-        // handle mouse events.
-        document.addEventListener('mousedown', startDraw);
-        document.addEventListener('mouseup', endDraw);
-        window.addEventListener("mousemove", (e) => {
-
-            // erase on shift key press.
-            if (e.shiftKey)
-                middleDraw(e, "black", 50)
-            else
-                middleDraw(e)
-        });
-
-        // handle touch events.
-        document.addEventListener('touchstart', startDraw);
-        document.addEventListener('touchend', endDraw);
-        window.addEventListener("touchmove", (e) => {
-
-            // erase on double tap.
-            if (e.touches.length === 2)
-                middleDraw(e.touches[0], "black", 50)
-            else
-                middleDraw(e.touches[0])
-        });
-    });
-    document.onkeydown = function (e) {
-        // clear on ctrl + x.
-        if (e.ctrlKey && e.which === 88) {
-            resize()
-        }
-    };
-    let coordinate = {x: 0, y: 0};
-    let draw = false;
-    const board = document.getElementById("board");
-    const ctx = board.getContext("2d");
-    const resize = () => {
-        ctx.canvas.width = window.innerWidth;
-        ctx.canvas.height = window.innerHeight;
-    }
-    position = (e) => {
-        // positions.
-        coordinate.x = e.clientX;
-        coordinate.y = e.clientY;
-    }
-    startDraw = (e) => {
-        draw = true;
-        // update the position.
-        position(e);
-    }
-    endDraw = () => {
-        draw = false;
-    }
-    middleDraw = (e, color = "white", width = 3) => {
-        // if stop drawing exit it.
-        if (!draw) return;
-        // resets the current path
-        ctx.beginPath();
-        // set width/size.
-        ctx.lineWidth = width;
-        // Sets the end of the lines drawn round to look better.
-        ctx.lineCap = 'round';
-        // set the line color.
-        ctx.strokeStyle = color;
-        // move the cursor accordingly the position of mouse or touch.
-        ctx.moveTo(coordinate.x, coordinate.y);
-        // update the position as we move around.
-        position(e);
-        // mark position of line
-        ctx.lineTo(coordinate.x , coordinate.y);
-        // Finally, draws the line.
-        ctx.stroke();
-    }
-</script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <!-- viewport to disable zoom -->
+        <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+        <!-- for device that can't use viewport -->
+        <meta name="HandheldFriendly" content="true" />
+        <title>Board</title>
+    </head>
+    <body>
+        <canvas id="board"></canvas>
+    </body>
+    <script src="public/bundle.js" charset="utf-8"></script>
 </html>

@@ -1,4 +1,6 @@
 /vendor
+/node_modules
 t.html
 edit.svg
 edit.png
+package-lock.json
