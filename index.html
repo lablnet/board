@@ -28,8 +28,8 @@
         });
 
         document.addEventListener('touchstart', (e) => {
-            e.stopPropagation();
             start()
+            document.firstElementChild.style.zoom = "reset";
         });
         document.addEventListener('touchend', stop);
         window.addEventListener("touchmove", (e) => {
