@@ -27,7 +27,10 @@
                 paint(e)
         });
 
-        document.addEventListener('touchstart', start);
+        document.addEventListener('touchstart', (e) => {
+            e.stopPropagation();
+            start()
+        });
         document.addEventListener('touchend', stop);
         window.addEventListener("touchmove", (e) => {
             if (e.touches.length === 2)
@@ -35,11 +38,6 @@
             else
                 paint(e.touches[0])
         });
-
-        document.getElementById('board').addEventListener('touchstart',
-            (e) => {
-                e.stopPropagation()
-            }, false);
 
         //window.addEventListener('resize', resize);
 
