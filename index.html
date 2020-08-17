@@ -25,31 +25,29 @@
 
             // erase on shift key press.
             if (e.shiftKey)
-                paint(e, "black", 50)
+                middleDraw(e, "black", 50)
             else
-                paint(e)
+                middleDraw(e)
         });
 
         // handle touch events.
-        document.addEventListener('touchstart', (e) => {
-            start()
-        });
-        document.addEventListener('touchend', stop);
+        document.addEventListener('touchstart', startDraw);
+        document.addEventListener('touchend', endDraw);
         window.addEventListener("touchmove", (e) => {
 
             // erase on double tap.
             if (e.touches.length === 2)
-                paint(e.touches[0], "black", 50)
+                middleDraw(e.touches[0], "black", 50)
             else
-                paint(e.touches[0])
+                middleDraw(e.touches[0])
         });
     });
-   /* document.onkeydown = function (e) {
+    document.onkeydown = function (e) {
         // clear on ctrl + x.
         if (e.ctrlKey && e.which === 88) {
             resize()
         }
-    };*/
+    };
     let coordinate = {x: 0, y: 0};
     let draw = false;
     const board = document.getElementById("board");
@@ -60,8 +58,8 @@
     }
     position = (e) => {
         // positions.
-        coordinate.x = e.clientX - board.offsetLeft;// - 2;
-        coordinate.y = e.clientY - board.offsetTop ;//+ 22;
+        coordinate.x = e.clientX - board.offsetLeft - 2;
+        coordinate.y = e.clientY - board.offsetTop + 22;
     }
     startDraw = (e) => {
         draw = true;
@@ -71,7 +69,7 @@
     endDraw = () => {
         draw = false;
     }
-    paint = (e, color = "white", width = 3) => {
+    middleDraw = (e, color = "white", width = 3) => {
         // if stop drawing exit it.
         if (!draw) return;
         // resets the current path
