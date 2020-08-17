@@ -15,80 +15,81 @@
 
 </canvas>
 <script>
-    let coordinate = {x: 0, y: 0};
     window.addEventListener('load', () => {
         resize(); // Resizes the canvas once the window loads
-        document.addEventListener('mousedown', start);
-        document.addEventListener('mouseup', stop);
+
+        // handle mouse events.
+        document.addEventListener('mousedown', startDraw);
+        document.addEventListener('mouseup', endDraw);
         window.addEventListener("mousemove", (e) => {
+
+            // erase on shift key press.
             if (e.shiftKey)
                 paint(e, "black", 50)
             else
                 paint(e)
         });
 
+        // handle touch events.
         document.addEventListener('touchstart', (e) => {
             start()
-            document.firstElementChild.style.zoom = "reset";
         });
         document.addEventListener('touchend', stop);
         window.addEventListener("touchmove", (e) => {
+
+            // erase on double tap.
             if (e.touches.length === 2)
                 paint(e.touches[0], "black", 50)
             else
                 paint(e.touches[0])
         });
-
-        //window.addEventListener('resize', resize);
-
-    })
+    });
+    document.onkeydown = function (e) {
+        // clear on ctrl + x.
+        if (e.ctrlKey && e.which === 88) {
+            resize()
+        }
+    };
+    let coordinate = {x: 0, y: 0};
+    let draw = false;
     const board = document.getElementById("board");
     const ctx = board.getContext("2d");
     const resize = () => {
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
     }
-    let draw = false;
     position = (e) => {
-        coordinate.x = e.clientX - board.offsetLeft;
-        coordinate.y = e.clientY - board.offsetTop;
+        // positions.
+        coordinate.x = e.clientX - board.offsetLeft - 2;
+        coordinate.y = e.clientY - board.offsetTop + 22;
     }
-    start = (e) => {
+    startDraw = (e) => {
         draw = true;
+        // update the position.
         position(e);
     }
-    stop = () => {
+    endDraw = () => {
         draw = false;
     }
     paint = (e, color = "white", width = 3) => {
+        // if stop drawing exit it.
         if (!draw) return;
+        // resets the current path
         ctx.beginPath();
-        //console.log("Start Draw!!", e.center.x, e.center.y);
-
+        // set width/size.
         ctx.lineWidth = width;
-
-        // Sets the end of the lines drawn
-        // to a round shape.
+        // Sets the end of the lines drawn round to look better.
         ctx.lineCap = 'round';
-
+        // set the line color.
         ctx.strokeStyle = color;
-
-        // The cursor to start drawing
-        // moves to this coordinate.
+        // move the cursor accordingly the position of mouse or touch.
         ctx.moveTo(coordinate.x, coordinate.y);
-
-        // The position of the cursor
-        // gets updated as we move the
-        // mouse around.
+        // update the position as we move around.
         position(e);
-
-        // A line is traced from start
-        // coordinate to this coordinate
+        // mark position of line
         ctx.lineTo(coordinate.x , coordinate.y);
-
-        // Draws the line.
+        // Finally, draws the line.
         ctx.stroke();
-
     }
 </script>
 </body>
