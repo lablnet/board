@@ -36,6 +36,11 @@
                 paint(e.touches[0])
         });
 
+        document.getElementById('board').addEventListener('touchstart',
+            (e) => {
+                e.stopPropagation()
+            }, false);
+
         //window.addEventListener('resize', resize);
 
     })
