@@ -1,9 +1,9 @@
 var cacheName = 'lablnet-board-pwa';
 var filesToCache = [
-    '/',
-    '/index.html',
-    '/css/app.css',
-    '/js/app.js'
+    '/board/',
+    '/board/index.html',
+    '/board/css/app.css',
+    '/board/js/app.js'
 ];
 
 /* Start the service worker and cache all of the app's content */
