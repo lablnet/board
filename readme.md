@@ -40,3 +40,4 @@ Thank, you so much.
 - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 - https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
 - https://css-tricks.com/using-css-cursors/
+- https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image

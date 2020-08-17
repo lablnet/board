@@ -1,15 +1,46 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <!-- viewport to disable zoom -->
-        <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
-        <!-- for device that can't use viewport -->
-        <meta name="HandheldFriendly" content="true" />
-        <title>Board</title>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Board</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="white"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Hello World">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <style>
+        #board {
+            display: none;
+        }
+    </style>
     </head>
     <body>
-        <canvas id="board"></canvas>
+    <div id="first">
+        <center>
+            <h2>
+                Board
+            </h2>
+        </center>
+        <button id="start">
+            open
+        </button>
+    </div>
+
+    <canvas id="board"></canvas>
     </body>
-    <script src="public/bundle.js" charset="utf-8"></script>
+    <script src="./js/app.js" charset="utf-8"></script>
+    <script>
+        document.getElementById("start").onclick = () => {
+            document.getElementById("board").style.display = "block";
+            document.getElementById("first").style.display = "none";
+        }
+
+    </script>
 </html>
