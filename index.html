@@ -44,12 +44,12 @@
                 paint(e.touches[0])
         });
     });
-    document.onkeydown = function (e) {
+   /* document.onkeydown = function (e) {
         // clear on ctrl + x.
         if (e.ctrlKey && e.which === 88) {
             resize()
         }
-    };
+    };*/
     let coordinate = {x: 0, y: 0};
     let draw = false;
     const board = document.getElementById("board");
@@ -60,8 +60,8 @@
     }
     position = (e) => {
         // positions.
-        coordinate.x = e.clientX - board.offsetLeft - 2;
-        coordinate.y = e.clientY - board.offsetTop + 22;
+        coordinate.x = e.clientX - board.offsetLeft;// - 2;
+        coordinate.y = e.clientY - board.offsetTop ;//+ 22;
     }
     startDraw = (e) => {
         draw = true;
