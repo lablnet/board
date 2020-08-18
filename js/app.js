@@ -56,7 +56,12 @@ window.addEventListener('load', () => {
                 top: e.touches[0].clientY
             };
             setMenuPosition(origin);
+        }
 
+        // On four finger remove all.
+        if (e.touches.length === 5) {
+            localStorage.removeItem("board");
+            resize()
         }
     });
 
