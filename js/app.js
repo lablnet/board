@@ -45,7 +45,7 @@ window.addEventListener('load', () => {
             middleDraw(e.touches[0], "black", 50)
 
         // Only allow to draw with one tap/finger
-        if (e.touches.length === )
+        if (e.touches.length === 1)
             middleDraw(e.touches[0])
 
         // Open Menu upon three finger tap.
