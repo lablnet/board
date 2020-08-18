@@ -1,12 +1,14 @@
 // Progressive app
-/*window.onload = () => {
-    'use strict';
+if (debug === false) {
+    window.onload = () => {
+        'use strict';
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-            .register('./pwa.js');
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('./pwa.js');
+        }
     }
-}*/
+}
 // Event handle on page load.
 window.addEventListener('load', () => {
     // Resizes the canvas once the window loads
@@ -45,7 +47,7 @@ window.addEventListener('load', () => {
             middleDraw(e.touches[0], "black", 50)
 
         // Only allow to draw with one tap/finger
-        if (e.touches.length === )
+        if (e.touches.length === 1)
             middleDraw(e.touches[0])
 
         // Open Menu upon three finger tap.
@@ -56,16 +58,11 @@ window.addEventListener('load', () => {
                 top: e.touches[0].clientY
             };
             setMenuPosition(origin);
-
-<<<<<<< HEAD
+        }
         // On five finger remove all.
         if (e.touches.length === 5) {
-            if (confirm("Are you sure, clear all? ")) {
-                localStorage.removeItem("board");
-                resize()
-            }
-=======
->>>>>>> parent of e62897f... On four finger remove all
+            localStorage.removeItem("board");
+            resize();
         }
     });
 
@@ -101,10 +98,8 @@ const menuItem = (e) => {
 document.onkeydown = function (e) {
     // clear on ctrl + x.
     if (e.ctrlKey && e.which === 88) {
-        if (confirm("Are you sure, clear all? ")) {
-            localStorage.removeItem("board");
-            resize()
-        }
+        localStorage.removeItem("board");
+        resize()
     }
 };
 let coordinate = {x: 0, y: 0};
