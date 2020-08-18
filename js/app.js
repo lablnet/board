@@ -43,7 +43,9 @@ window.addEventListener('load', () => {
         // erase on double tap.
         if (e.touches.length === 2)
             middleDraw(e.touches[0], "black", 50)
-        else
+
+        // Only allow to draw with one tap/finger
+        if (e.touches.length === )
             middleDraw(e.touches[0])
 
         // Open Menu upon three finger tap.
