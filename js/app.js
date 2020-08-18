@@ -7,11 +7,16 @@ window.onload = () => {
             .register('./pwa.js');
     }
 }
+
 window.addEventListener('load', () => {
     // Resizes the canvas once the window loads
     resize();
     // Restore image from the localStorage if exists.
-    restoreFromLocalStorage();
+    /*
+     * We can restore it but it will be better if we provide option to restore or not!
+     * As in PWA we have to show some content at any cost.
+     */
+    //restoreFromLocalStorage();
 
     // handle mouse events.
     document.addEventListener('mousedown', startDraw);
@@ -45,7 +50,7 @@ document.onkeydown = function (e) {
 let coordinate = {x: 0, y: 0};
 let draw = false;
 const board = document.getElementById("board");
-const ctx = board.getContext("2d");
+const ctx = board.getContext("2d", { alpha: false });
 
 const saveToLocalStorage = () => {
     // Get image base64 data.
@@ -109,5 +114,10 @@ const middleDraw = (e, color = "white", width = 3) => {
     // Finally, draws the line.
     ctx.stroke();
 
-    saveToLocalStorage()
+    /*
+    * Save it real time cause performance issue in some browser like in firefox.
+    * So i think it will be better if we provide save button,
+    * upon press we save it.
+    */
+    //saveToLocalStorage()
 }
