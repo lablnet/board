@@ -6,8 +6,11 @@ Simple, standalone and very lightweight board app/PWA in JavaScript.
 - [x] Draw on screen.
 - [x] Progressive Web App.
 - [x] Clear All using shortcut or gesture.
-    - [x] In desktop control + x
-    - [ ] In mobile three tap swipe up.
+    - [x] In desktop (control + x)
+    - [x] In mobile three tap swipe up (four tap)
+- [x] Custom context menu
+    - [x] In desktop (right click to open)
+    - [x] In mobile (three finger click)
 - [ ] Change cursor to pen.
 - [ ] Change marker color.
 - [ ] Change background color of board.
