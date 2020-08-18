@@ -18,6 +18,13 @@ window.addEventListener('load', () => {
      */
     //restoreFromLocalStorage();
 
+    // On window resize handle.
+    window.onresize = () => {
+        saveToLocalStorage();
+        resize();
+        restoreFromLocalStorage();
+    };
+
     // handle mouse events.
     document.addEventListener('mousedown', startDraw);
     document.addEventListener('mouseup', endDraw);
@@ -80,11 +87,20 @@ const restoreFromLocalStorage = () => {
 const resize = () => {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
+
+    // If window is full screen
+    if((window.fullScreen) ||
+        (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+        ctx.canvas.width = window.screen.width;
+        ctx.canvas.height = window.screen.height;
+    }
+
 }
 const position = (e) => {
     // positions.
-    coordinate.x = e.clientX;
-    coordinate.y = e.clientY;
+    coordinate.x = (e.clientX - board.offsetLeft);
+    coordinate.y = (e.clientY - board.offsetTop);
+
 }
 const startDraw = (e) => {
     draw = true;
