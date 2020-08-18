@@ -7,7 +7,7 @@ window.onload = () => {
             .register('./pwa.js');
     }
 }
-
+// Event handle on page load.
 window.addEventListener('load', () => {
     // Resizes the canvas once the window loads
     resize();
@@ -105,12 +105,20 @@ const middleDraw = (e, color = "white", width = 3) => {
     ctx.lineCap = 'round';
     // set the line color.
     ctx.strokeStyle = color;
+
+    /*
+     * Default make the line solid.
+     * source: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash
+     */
+    ctx.setLineDash([]);
+
     // move the cursor accordingly the position of mouse or touch.
     ctx.moveTo(coordinate.x, coordinate.y);
     // update the position as we move around.
     position(e);
     // mark position of line
     ctx.lineTo(coordinate.x , coordinate.y);
+
     // Finally, draws the line.
     ctx.stroke();
 
@@ -120,4 +128,5 @@ const middleDraw = (e, color = "white", width = 3) => {
     * upon press we save it.
     */
     //saveToLocalStorage()
+    return;
 }
