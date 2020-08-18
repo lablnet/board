@@ -1,9 +1,10 @@
 # Board
-Simple standalone board app in JavaScript.
+Simple, standalone and very lightweight board app/PWA in JavaScript.
 
 ## Features
 - [x] Standalone.
-- [x] Draw lines.
+- [x] Draw on screen.
+- [x] Progressive Web App.
 - [x] Clear All using shortcut or gesture.
     - [x] In desktop control + x
     - [ ] In mobile three tap swipe up.
@@ -24,7 +25,7 @@ There is still a lot of work to do, so feel free to contribute to open `PR`
 GPL-3
 
 ## Support
-Donate coffee?  
+If you like this project; Donate coffee?  
 here is the bitcoin address.
 [![Balance](https://img.balancebadge.io/btc/37x6PA4qtPu2fQnYdW5U7jztYhbchASpBV.svg)](https://img.balancebadge.io/btc/37x6PA4qtPu2fQnYdW5U7jztYhbchASpBV.svg)
 
