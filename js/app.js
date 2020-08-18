@@ -1,12 +1,12 @@
 // Progressive app
-window.onload = () => {
+/*window.onload = () => {
     'use strict';
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
             .register('./pwa.js');
     }
-}
+}*/
 // Event handle on page load.
 window.addEventListener('load', () => {
     // Resizes the canvas once the window loads
@@ -58,10 +58,12 @@ window.addEventListener('load', () => {
             setMenuPosition(origin);
         }
 
-        // On four finger remove all.
+        // On five finger remove all.
         if (e.touches.length === 5) {
-            localStorage.removeItem("board");
-            resize()
+            if (confirm("Are you sure, clear all? ")) {
+                localStorage.removeItem("board");
+                resize()
+            }
         }
     });
 
@@ -97,8 +99,10 @@ const menuItem = (e) => {
 document.onkeydown = function (e) {
     // clear on ctrl + x.
     if (e.ctrlKey && e.which === 88) {
-        localStorage.removeItem("board");
-        resize()
+        if (confirm("Are you sure, clear all? ")) {
+            localStorage.removeItem("board");
+            resize()
+        }
     }
 };
 let coordinate = {x: 0, y: 0};
