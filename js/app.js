@@ -56,14 +56,16 @@ window.addEventListener('load', () => {
                 top: e.touches[0].clientY
             };
             setMenuPosition(origin);
-        }
 
+<<<<<<< HEAD
         // On five finger remove all.
         if (e.touches.length === 5) {
             if (confirm("Are you sure, clear all? ")) {
                 localStorage.removeItem("board");
                 resize()
             }
+=======
+>>>>>>> parent of e62897f... On four finger remove all
         }
     });
 
