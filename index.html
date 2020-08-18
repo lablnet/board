@@ -22,25 +22,21 @@
     </style>
     </head>
     <body>
-    <div id="first">
-        <center>
-            <h2>
-                Board
-            </h2>
-        </center>
-        <button id="start">
-            open
-        </button>
-    </div>
-
-    <canvas id="board"></canvas>
+        <div id="first">
+            <center>
+                <h2>
+                    Board
+                </h2>
+            </center>
+            <button id="start">
+                open
+            </button>
+        </div>
+        <canvas id="board"></canvas>
     </body>
     <script src="./js/app.js" charset="utf-8"></script>
     <script>
-        document.getElementById("start").onclick = () => {
-            document.getElementById("board").style.display = "block";
-            document.getElementById("first").style.display = "none";
-        }
-
+        document.getElementById("board").style.display = "block";
+        document.getElementById("first").style.display = "none";
     </script>
 </html>
