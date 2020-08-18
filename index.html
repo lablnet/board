@@ -19,6 +19,7 @@
         #board {
             display: none;
         }
+
     </style>
     </head>
     <body>
@@ -33,6 +34,13 @@
             </button>
         </div>
         <canvas id="board"></canvas>
+        <div class="menu">
+            <ul class="items">
+                <li class="item" onclick="menuItem(this)" content="setting">Setting</li>
+                <li class="item" onclick="menuItem(this)" content="help">Help</li>
+                <li class="item" onclick="menuItem(this)" content="about">About</li>
+            </ul>
+        </div>
     </body>
     <script src="./js/app.js" charset="utf-8"></script>
     <script>

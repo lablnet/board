@@ -11,3 +11,24 @@ html, body {
     background-color: black;
     /*cursor: url(edit1.png) , default!important;*/
 }
+/* context menu */
+.menu {
+    width: 120px;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: none;
+    background-color: white;
+}
+.menu .items {
+    list-style: none;
+    padding: 10px 0;
+}
+.menu .items .item {
+    font-weight: 500;
+    font-size: 18px;
+    padding: 10px 40px 10px 20px;
+    cursor: pointer;
+}
+.menu .items .item:hover {
+    background: rgba(0, 0, 0, 0.2);
+}

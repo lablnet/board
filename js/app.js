@@ -45,8 +45,48 @@ window.addEventListener('load', () => {
             middleDraw(e.touches[0], "black", 50)
         else
             middleDraw(e.touches[0])
+
+        // Open Menu upon three finger tap.
+        if (e.touches.length === 3) {
+            // get the menu position.
+            const origin = {
+                left: e.touches[0].clientX,
+                top: e.touches[0].clientY
+            };
+            setMenuPosition(origin);
+
+        }
     });
+
+    // context menu
+    const menu = document.querySelector(".menu");
+    let menuVisible = false;
+    const toggleMenu = (command) => {
+        menu.style.display = command === "show" ? "block" : "none";
+    };
+    window.addEventListener("click", e => {
+        if (menuVisible) toggleMenu("hide");
+        menuVisible = false;
+    });
+    window.addEventListener("contextmenu", e => {
+        e.preventDefault();
+        const origin = {
+            left: e.clientX,
+            top: e.clientY
+        };
+        setMenuPosition(origin);
+        return false;
+    });
+    const setMenuPosition =  ({ top, left }) => {
+        menu.style.left = `${left}px`;
+        menu.style.top = `${top}px`;
+        toggleMenu("show");
+        menuVisible = true;
+    };
 });
+const menuItem = (e) => {
+    let type = e.getAttribute("content");
+}
 document.onkeydown = function (e) {
     // clear on ctrl + x.
     if (e.ctrlKey && e.which === 88) {
