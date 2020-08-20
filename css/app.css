@@ -48,6 +48,7 @@ html, body {
     padding: 12px;
     border: 1px solid black;
     width: 80%;
+    margin-left: 10%;
     box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
 
 }
@@ -71,4 +72,23 @@ html, body {
 }
 .modal-footer {
     padding: 15px;
+}
+.responsive {
+    overflow-x:auto;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+table, th, td {
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
+th {
+    background-color: black;
+    color: white;
+}
+tr:hover {
+    background-color: black;
+    color: white;
 }

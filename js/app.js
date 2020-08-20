@@ -113,8 +113,17 @@ const menuItem = (e) => {
     let type = e.getAttribute("content");
     const title = document.getElementsByClassName("modal-heading")[0];
     const body = document.getElementsByClassName("modal-body")[0];
-    const footer = document.getElementsByClassName("modal-footer")[0];
 
+    const footer = document.getElementsByClassName("modal-footer")[0];
+    if (type == "about") {
+        title.innerHTML = "About";
+
+        modal.style.display = "block";
+    } else if (type == "help") {
+        title.innerHTML = "Help";
+        document.getElementById("help").style.display = 'block';
+        modal.style.display = "block";
+    }
 }
 const saveToLocalStorage = () => {
     // Get image base64 data.
