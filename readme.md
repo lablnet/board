@@ -11,10 +11,12 @@ Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.
 - [x] Custom context menu
     - [x] In desktop (right click to open)
     - [x] In mobile (three finger click)
-- [ ] Change cursor to pen.
-- [ ] Change marker color.
-- [ ] Change background color of board.
-- [ ] Change font size of marker.
+- [x] Help Menu
+- [x] About page
+- [x] Settings page:
+    - [x] Change marker color.
+    - [x] Change background color of board.
+    - [x] Change font size of marker.
 - [ ] Download as image.
     - [ ] With background 
     - [ ] Transparent

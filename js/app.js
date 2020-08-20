@@ -33,10 +33,12 @@ window.addEventListener('load', () => {
     const toggleMenu = (command) => {
         menu.style.display = command === "show" ? "block" : "none";
     };
+    // hide menu on click
     window.addEventListener("click", e => {
         if (menuVisible) toggleMenu("hide");
         menuVisible = false;
     });
+    // context menu handle
     window.addEventListener("contextmenu", e => {
         e.preventDefault();
         const origin = {
@@ -46,6 +48,7 @@ window.addEventListener('load', () => {
         setMenuPosition(origin);
         return false;
     });
+    // get position for menu.
     const setMenuPosition =  ({ top, left }) => {
         menu.style.left = `${left}px`;
         menu.style.top = `${top}px`;
@@ -61,11 +64,19 @@ window.addEventListener('load', () => {
         if (!menuVisible) {
             // erase on shift key press.
             if (e.shiftKey)
-                middleDraw(e, "black", 50)
+                middleDraw(e, localStorage.getItem("bcolor"), parseInt(localStorage.getItem("font")) + 20);
             else
-                middleDraw(e)
+                middleDraw(e);
         }
     });
+    // handle event for clear all.
+    document.onkeydown =  (e) => {
+        // clear on ctrl + x.
+        if (e.ctrlKey && e.keyCode === 88) {
+            localStorage.removeItem("board");
+            resize();
+        }
+    };
 
     // handle touch events.
     document.addEventListener('touchstart', startDraw);
@@ -75,11 +86,11 @@ window.addEventListener('load', () => {
         if (!menuVisible) {
             // erase on double tap.
             if (e.touches.length === 2)
-                middleDraw(e.touches[0], "black", 50)
+                middleDraw(e.touches[0], localStorage.getItem("bcolor"), parseInt(localStorage.getItem("font")) + 20);
 
             // Only allow to draw with one tap/finger
             if (e.touches.length === 1)
-                middleDraw(e.touches[0])
+                middleDraw(e.touches[0]);
 
             // Open Menu upon three finger tap.
             if (e.touches.length === 3) {
@@ -99,18 +110,34 @@ window.addEventListener('load', () => {
     });
 
 });
-document.onkeydown =  (e) => {
-    // clear on ctrl + x.
-    if (e.ctrlKey && e.keyCode === 88) {
-        localStorage.removeItem("board");
-        resize();
-    }
-};
+
+/* Set default parameters. */
+const refactor = () => {
+    // If font not exists, make it default.
+    if (!localStorage.getItem("font"))
+        localStorage.setItem("font", 3);
+    // If background color not exists make it default.
+    if (!localStorage.getItem("bcolor"))
+        localStorage.setItem("bcolor", "black");
+    // If foreground/marker color not exists make it default.
+    if (!localStorage.getItem("fcolor"))
+        localStorage.setItem("fcolor", "white");
+}
+refactor();
+/* Default variables. */
 let coordinate = {x: 0, y: 0};
 let draw = false;
+
+// get board.
 const board = document.getElementById("board");
+// Change background color.
+board.style.backgroundColor = localStorage.getItem("bcolor");
+
+// get the modal and close btn.
 const modal = document.getElementById("modal");
 const close = document.getElementsByClassName("close")[0];
+
+// close modal.
 close.onclick = function() {
     modal.style.display = "none";
     document.getElementById("about").style.display = 'none';
@@ -118,8 +145,10 @@ close.onclick = function() {
     document.getElementById("setting").style.display = 'none';
 
 }
-const ctx = board.getContext("2d", { alpha: false });
+// Init canvas
+const ctx = board.getContext("2d");
 
+/* Menu handling. */
 const menuItem = (e) => {
     let type = e.getAttribute("content");
     const title = document.getElementsByClassName("modal-heading")[0];
@@ -140,9 +169,35 @@ const menuItem = (e) => {
     } else if (type == "setting") {
         title.innerHTML = "Settings";
         document.getElementById("setting").style.display = 'block';
+
+        // defaults.
+        document.getElementById("font").value = localStorage.getItem("font");
+
+        const btn = document.getElementById("save");
         modal.style.display = "block";
+        btn.onclick = (e) => {
+            const font = document.getElementById("font").value;
+            const f = document.getElementById("fcolor");
+            const b = document.getElementById("bcolor");
+            const marker_color = f.options[f.selectedIndex].value;
+            const background_color = b.options[b.selectedIndex].value;
+            if (marker_color != background_color && font >= 1) {
+                console.log(background_color);
+                localStorage.setItem("bcolor", background_color);
+                localStorage.setItem("fcolor", marker_color);
+                localStorage.setItem("font", font);
+                close.click();
+                // Change background color.
+                board.style.backgroundColor = localStorage.getItem('bcolor');
+            } else {
+                const error = "Wrong input are given";
+                document.getElementById("error").innerText = error;
+            }
+        }
     }
 }
+
+/* Save to localStorage as image. */
 const saveToLocalStorage = () => {
     // Get image base64 data.
     let canvasContents = board.toDataURL();
@@ -156,6 +211,8 @@ const saveToLocalStorage = () => {
     // Finally, store/update it.
     localStorage.setItem("board", string);
 }
+
+/* restore from localStorage as image. */
 const restoreFromLocalStorage = () => {
     // If the image data exists.
     if (localStorage.getItem("board")) {
@@ -168,6 +225,8 @@ const restoreFromLocalStorage = () => {
         image.src = img;
     }
 }
+
+/* Resize. */
 const resize = () => {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
@@ -180,30 +239,38 @@ const resize = () => {
     }
 
 }
+
+/* Get positions and store it to coordinate. */
 const position = (e) => {
     // positions.
     coordinate.x = (e.clientX - board.offsetLeft);
     coordinate.y = (e.clientY - board.offsetTop);
 
 }
+
+/* Start the drawing. */
 const startDraw = (e) => {
     draw = true;
     // update the position.
     position(e);
 }
+
+/* End the drawing. */
 const endDraw = () => {
     draw = false;
 }
-const middleDraw = (e, color = "white", width = 3) => {
+
+/* drawing */
+const middleDraw = (e, color = localStorage.getItem("fcolor"), width = localStorage.getItem("font")) => {
     // if stop drawing exit it.
     if (!draw) return;
     // resets the current path
     ctx.beginPath();
-    // set width/size.
+    // set width/size, get from local-storage.
     ctx.lineWidth = width;
     // Sets the end of the lines drawn round to look better.
     ctx.lineCap = 'round';
-    // set the line color.
+    // set the line color, get from local-storage.
     ctx.strokeStyle = color;
 
     /*

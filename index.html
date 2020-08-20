@@ -33,7 +33,7 @@
                 open
             </button>
         </div>
-        <canvas id="board"></canvas>
+        <canvas id="board" class="red"></canvas>
         <div class="menu">
             <ul class="items">
                 <li class="item" onclick="menuItem(this)" content="setting">Setting</li>
@@ -68,6 +68,7 @@
                                     <option value="red"><span style="color: red">Red</span></option>
                                     <option value="blue"><span style="color: blue">Blue</span></option>
                                 </select>
+                                <span id="error"></span>
                                 <button id="save">Save</button>
                             </div>
                         </div>

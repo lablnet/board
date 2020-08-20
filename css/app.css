@@ -8,8 +8,6 @@ html, body {
 #board {
     width: 100%;
     height: 100%;
-    background-color: black;
-    /*cursor: url(edit1.png) , default!important;*/
 }
 /* context menu */
 .menu {
@@ -120,4 +118,9 @@ button {
     margin: 10px;
     font-size: 19px;
     cursor: pointer;
+    float: right;
+}
+#error {
+    color: red;
+    padding: 12px;
 }
