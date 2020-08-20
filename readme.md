@@ -85,6 +85,5 @@ here is the bitcoin address.
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial  
 - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent  
 - https://developer.mozilla.org/en-US/docs/Web/API/Touch_events  
-- https://css-tricks.com/using-css-cursors/  
 - https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image  
 - https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure
