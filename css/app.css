@@ -99,3 +99,25 @@ tr:hover {
 ul {
     list-style: none;
 }
+#setting {
+    padding: 15px;
+}
+input {
+    padding: 12px;
+    border: 1px solid black;
+    width: 100%;
+    margin: 5px;
+}
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 5px;
+}
+button {
+    padding: 12px;
+    color: white;
+    background-color: black;
+    margin: 10px;
+    font-size: 19px;
+    cursor: pointer;
+}

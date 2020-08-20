@@ -137,6 +137,10 @@ const menuItem = (e) => {
         title.innerHTML = "Help";
         document.getElementById("help").style.display = 'block';
         modal.style.display = "block";
+    } else if (type == "setting") {
+        title.innerHTML = "Settings";
+        document.getElementById("setting").style.display = 'block';
+        modal.style.display = "block";
     }
 }
 const saveToLocalStorage = () => {
