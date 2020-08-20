@@ -3,8 +3,8 @@ var filesToCache = [
     '/board/',
     '/board/index.html',
     '/board/config.js',
-    '/board/css/app.css',
-    '/board/js/app.js'
+    '/board/css/app.min.css',
+    '/board/js/app.min.js'
 ];
 
 /* Start the service worker and cache all of the app's content */
