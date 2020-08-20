@@ -20,7 +20,7 @@ Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.
 - [x] Download as image.  
   
 ## Install
-  1. close this
+  1. Clone this
   
 		`git clone -b 1.0.0 https://github.com/Lablnet/board.git`
 		
