@@ -30,7 +30,8 @@ html, body {
     cursor: pointer;
 }
 .menu .items .item:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background-color: black;
+    color: white;
 }
 .modal {
     display: none;
@@ -80,7 +81,7 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-table, th, td {
+table, th, td, strong, li {
     padding: 15px;
     border-bottom: 1px solid black;
 }
@@ -91,4 +92,10 @@ th {
 tr:hover {
     background-color: black;
     color: white;
+}
+#help, #about {
+    display: none;
+}
+ul {
+    list-style: none;
 }

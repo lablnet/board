@@ -1,5 +1,5 @@
 # Board
-Simple, standalone and very lightweight board app/PWA in JavaScript.
+Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.
 
 ## Features
 - [x] Standalone.

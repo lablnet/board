@@ -106,6 +106,10 @@ const modal = document.getElementById("modal");
 const close = document.getElementsByClassName("close")[0];
 close.onclick = function() {
     modal.style.display = "none";
+    document.getElementById("about").style.display = 'none';
+    document.getElementById("help").style.display = 'none';
+    document.getElementById("setting").style.display = 'none';
+
 }
 const ctx = board.getContext("2d", { alpha: false });
 
@@ -117,7 +121,9 @@ const menuItem = (e) => {
     const footer = document.getElementsByClassName("modal-footer")[0];
     if (type == "about") {
         title.innerHTML = "About";
+        modal.style.display = "block";
 
+        document.getElementById("about").style.display = 'block';
         modal.style.display = "block";
     } else if (type == "help") {
         title.innerHTML = "Help";
