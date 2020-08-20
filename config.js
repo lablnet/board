@@ -1,10 +1,12 @@
+// debug
 const debug = true;
+// version
 const version = "1.0.0";
-const colors = [
-    'red',
-    'green',
-    'blue',
-    'yellow',
-    'orange',
-    'brown',
-];
+// colors
+const colors =  {
+    "red": 'red',
+    'black': '#000',
+    'green': 'green',
+    'blue': 'blue',
+    'yellow': 'yellow',
+};

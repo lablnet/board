@@ -15,12 +15,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-    <style>
-        #board {
-            display: none;
-        }
-
-    </style>
     </head>
     <body>
         <div id="first">
@@ -33,7 +27,7 @@
                 open
             </button>
         </div>
-        <canvas id="board" class="red"></canvas>
+        <canvas id="board"></canvas>
         <div class="menu">
             <ul class="items">
                 <li class="item" onclick="menuItem(this)" content="setting">Setting</li>
@@ -56,17 +50,9 @@
                                 <input type="number" id="font" />
                                 <label for="fcolor">Foreground Color: </label>
                                 <select name="color" id="fcolor">
-                                    <option value="white"><span style="color: white">White</span></option>
-                                    <option value="blue"><span style="color: blue">Blue</span></option>
-                                    <option value="red"><span style="color: red">Red</span></option>
-                                    <option value="blue"><span style="color: blue">Blue</span></option>
                                 </select>
                                 <label for="bcolor">Background color: </label>
                                 <select name="color" id="bcolor">
-                                    <option value="white"><span style="color: white">White</span></option>
-                                    <option value="blue"><span style="color: blue">Blue</span></option>
-                                    <option value="red"><span style="color: red">Red</span></option>
-                                    <option value="blue"><span style="color: blue">Blue</span></option>
                                 </select>
                                 <span id="error"></span>
                                 <button id="save">Save</button>
@@ -127,7 +113,6 @@
     <script src="config.js"></script>
     <script src="./js/app.js" charset="utf-8"></script>
     <script>
-        document.getElementById("board").style.display = "block";
         document.getElementById("first").style.display = "none";
     </script>
 </html>

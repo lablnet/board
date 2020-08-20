@@ -110,6 +110,8 @@ select {
     width: 100%;
     padding: 12px;
     margin: 5px;
+    text-transform: capitalize!important;
+
 }
 button {
     padding: 12px;

@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
      * We can restore it but it will be better if we provide option to restore or not!
      * As in PWA we have to show some content at any cost.
      */
-    //restoreFromLocalStorage();
+    restoreFromLocalStorage();
 
     // On window resize handle.
     window.onresize = () => {
@@ -169,16 +169,40 @@ const menuItem = (e) => {
     } else if (type == "setting") {
         title.innerHTML = "Settings";
         document.getElementById("setting").style.display = 'block';
-
-        // defaults.
+        // set font size value to default.
         document.getElementById("font").value = localStorage.getItem("font");
-
+        // get elements.
+        const f = document.getElementById("fcolor");
+        const b = document.getElementById("bcolor");
+        // reset to default.
+        f.innerHTML = "";
+        b.innerHTML = "";
+        // loop through colors.
+        for (let key of Object.keys(colors)) {
+            // create required element.
+            let opt = document.createElement('option');
+            opt.value = colors[key];
+            opt.innerHTML = key;
+            // selected default or selected value.
+            if (key == localStorage.getItem("bcolor"))
+                opt.setAttribute("selected", true);
+            b.appendChild(opt);
+            // we need to recreate it, in order to append to both.
+            opt = document.createElement('option');
+            opt.value = colors[key];
+            opt.innerHTML = key;
+            // selected default or selected value.
+            if (key == localStorage.getItem("fcolor"))
+                opt.setAttribute("selected", true);
+            f.appendChild(opt);
+        }
+        // get the button.
         const btn = document.getElementById("save");
+        // open the modal.
         modal.style.display = "block";
         btn.onclick = (e) => {
+            // get form values.
             const font = document.getElementById("font").value;
-            const f = document.getElementById("fcolor");
-            const b = document.getElementById("bcolor");
             const marker_color = f.options[f.selectedIndex].value;
             const background_color = b.options[b.selectedIndex].value;
             if (marker_color != background_color && font >= 1) {

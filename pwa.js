@@ -2,6 +2,7 @@ var cacheName = 'lablnet-board-pwa';
 var filesToCache = [
     '/board/',
     '/board/index.html',
+    '/board/config.js',
     '/board/css/app.css',
     '/board/js/app.js'
 ];
