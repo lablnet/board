@@ -91,14 +91,12 @@ tr:hover {
     background-color: black;
     color: white;
 }
-#help, #about {
+#help, #about, #setting {
     display: none;
+    padding: 15px;
 }
 ul {
     list-style: none;
-}
-#setting {
-    padding: 15px;
 }
 input {
     padding: 12px;

@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
      * We can restore it but it will be better if we provide option to restore or not!
      * As in PWA we have to show some content at any cost.
      */
-    restoreFromLocalStorage();
+    //restoreFromLocalStorage();
 
     // On window resize handle.
     window.onresize = () => {
@@ -147,7 +147,17 @@ close.onclick = function() {
 }
 // Init canvas
 const ctx = board.getContext("2d");
+ctx.globalCompositeOperation = 'destination-over';
 
+/* Export/Download canvas image. */
+const downland = () => {
+    const link = document.createElement('a');
+    const locale = new Date().toLocaleString();
+    const filename = `board${locale}.png`;
+    link.download = filename;
+    link.href = board.toDataURL()
+    link.click();
+}
 /* Menu handling. */
 const menuItem = (e) => {
     let type = e.getAttribute("content");
@@ -155,18 +165,27 @@ const menuItem = (e) => {
     const body = document.getElementsByClassName("modal-body")[0];
 
     const footer = document.getElementsByClassName("modal-footer")[0];
+
+    // download menu
+    if (type == 'download') {
+        downland();
+    }
+    // about menu
     if (type == "about") {
         title.innerHTML = "About";
         modal.style.display = "block";
-
         document.getElementById("about").style.display = 'block';
         document.getElementById("version").innerHTML = version;
         modal.style.display = "block";
-    } else if (type == "help") {
+    }
+    // help menu
+    if (type == "help") {
         title.innerHTML = "Help";
         document.getElementById("help").style.display = 'block';
         modal.style.display = "block";
-    } else if (type == "setting") {
+    }
+    // settings menu
+    if (type == "setting") {
         title.innerHTML = "Settings";
         document.getElementById("setting").style.display = 'block';
         // set font size value to default.

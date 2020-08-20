@@ -17,11 +17,7 @@ Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.
     - [x] Change marker color.
     - [x] Change background color of board.
     - [x] Change font size of marker.
-- [ ] Download as image.
-    - [ ] With background 
-    - [ ] Transparent
-- [ ] Undo
-- [ ] Redo
+- [x] Download as image.
 
 ## Contributions  
 There is still a lot of work to do, so feel free to contribute to open `PR`  
