@@ -1,1 +1,1 @@
-var debug = true
+const debug = true;

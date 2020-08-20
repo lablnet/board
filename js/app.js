@@ -92,21 +92,30 @@ window.addEventListener('load', () => {
         menuVisible = true;
     };
 });
-const menuItem = (e) => {
-    let type = e.getAttribute("content");
-}
-document.onkeydown = function (e) {
+document.onkeydown =  (e) => {
     // clear on ctrl + x.
-    if (e.ctrlKey && e.which === 88) {
+    if (e.ctrlKey && e.keyCode === 88) {
         localStorage.removeItem("board");
-        resize()
+        resize();
     }
 };
 let coordinate = {x: 0, y: 0};
 let draw = false;
 const board = document.getElementById("board");
+const modal = document.getElementById("modal");
+const close = document.getElementsByClassName("close")[0];
+close.onclick = function() {
+    modal.style.display = "none";
+}
 const ctx = board.getContext("2d", { alpha: false });
 
+const menuItem = (e) => {
+    let type = e.getAttribute("content");
+    const title = document.getElementsByClassName("modal-heading")[0];
+    const body = document.getElementsByClassName("modal-body")[0];
+    const footer = document.getElementsByClassName("modal-footer")[0];
+
+}
 const saveToLocalStorage = () => {
     // Get image base64 data.
     let canvasContents = board.toDataURL();
