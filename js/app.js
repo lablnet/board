@@ -27,45 +27,6 @@ window.addEventListener('load', () => {
         restoreFromLocalStorage();
     };
 
-    // handle mouse events.
-    document.addEventListener('mousedown', startDraw);
-    document.addEventListener('mouseup', endDraw);
-    window.addEventListener("mousemove", (e) => {
-        // erase on shift key press.
-        if (e.shiftKey)
-            middleDraw(e, "black", 50)
-        else
-            middleDraw(e)
-    });
-
-    // handle touch events.
-    document.addEventListener('touchstart', startDraw);
-    document.addEventListener('touchend', endDraw);
-    window.addEventListener("touchmove", (e) => {
-        // erase on double tap.
-        if (e.touches.length === 2)
-            middleDraw(e.touches[0], "black", 50)
-
-        // Only allow to draw with one tap/finger
-        if (e.touches.length === 1)
-            middleDraw(e.touches[0])
-
-        // Open Menu upon three finger tap.
-        if (e.touches.length === 3) {
-            // get the menu position.
-            const origin = {
-                left: e.touches[0].clientX,
-                top: e.touches[0].clientY
-            };
-            setMenuPosition(origin);
-        }
-        // On five finger remove all.
-        if (e.touches.length === 5) {
-            localStorage.removeItem("board");
-            resize();
-        }
-    });
-
     // context menu
     const menu = document.querySelector(".menu");
     let menuVisible = false;
@@ -91,6 +52,52 @@ window.addEventListener('load', () => {
         toggleMenu("show");
         menuVisible = true;
     };
+
+    // handle mouse events.
+    document.addEventListener('mousedown', startDraw);
+    document.addEventListener('mouseup', endDraw);
+    window.addEventListener("mousemove", (e) => {
+        // Do not draw if menu is visible.
+        if (!menuVisible) {
+            // erase on shift key press.
+            if (e.shiftKey)
+                middleDraw(e, "black", 50)
+            else
+                middleDraw(e)
+        }
+    });
+
+    // handle touch events.
+    document.addEventListener('touchstart', startDraw);
+    document.addEventListener('touchend', endDraw);
+    window.addEventListener("touchmove", (e) => {
+        // Do not draw if menu is visible.
+        if (!menuVisible) {
+            // erase on double tap.
+            if (e.touches.length === 2)
+                middleDraw(e.touches[0], "black", 50)
+
+            // Only allow to draw with one tap/finger
+            if (e.touches.length === 1)
+                middleDraw(e.touches[0])
+
+            // Open Menu upon three finger tap.
+            if (e.touches.length === 3) {
+                // get the menu position.
+                const origin = {
+                    left: e.touches[0].clientX,
+                    top: e.touches[0].clientY
+                };
+                setMenuPosition(origin);
+            }
+            // On five finger remove all.
+            if (e.touches.length === 5) {
+                localStorage.removeItem("board");
+                resize();
+            }
+        }
+    });
+
 });
 document.onkeydown =  (e) => {
     // clear on ctrl + x.
@@ -124,6 +131,7 @@ const menuItem = (e) => {
         modal.style.display = "block";
 
         document.getElementById("about").style.display = 'block';
+        document.getElementById("version").innerHTML = version;
         modal.style.display = "block";
     } else if (type == "help") {
         title.innerHTML = "Help";
