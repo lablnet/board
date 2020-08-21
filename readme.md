@@ -1,4 +1,5 @@
 
+
 # Board  
 Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.  
   
@@ -37,6 +38,11 @@ Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.
 	 
 	 3. At end, `colors`
 		you can change it according to your requirement , you can add more colors too.
+
+## Usage
+
+![board](https://raw.githubusercontent.com/Lablnet/board/master/images/board.png "Board")
+
 
 ## File structure
  `css/app.css`  => Main core CSS style file.
