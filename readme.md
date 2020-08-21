@@ -79,7 +79,10 @@ here is the bitcoin address.
  Thank, you so much.  
   
 ## Disclaimer  
-**I do not accept responsibility for any illegal usage**  
+**I do not accept responsibility for any illegal usage**
+
+## Similar Project
+[Draw50](https://github.com/cs50/draw.cs50.io)
   
 ## Resources:  
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial  
