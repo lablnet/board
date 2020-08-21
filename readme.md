@@ -73,7 +73,7 @@ The app is tested in the following mentioned browsers.
 | Chrome | v83 | v84 |
 | Firefox | v79 | v68|
 | Opera | v70 | v59 |
-| EDGE | ... | v45 |
+| EDGE | v84 | v45 |
 | Safari | ... | ... |
 
 ## Contributions 
