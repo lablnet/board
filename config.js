@@ -9,4 +9,5 @@ const colors =  {
     'green': 'green',
     'blue': 'blue',
     'yellow': 'yellow',
+    "white": "white",
 };
