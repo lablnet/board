@@ -150,12 +150,26 @@ const ctx = board.getContext("2d");
 ctx.globalCompositeOperation = 'destination-over';
 
 /* Export/Download canvas image. */
-const downland = () => {
+const downland = (transparent = false) => {
     const link = document.createElement('a');
     const locale = new Date().toLocaleString();
     const filename = `board${locale}.png`;
     link.download = filename;
-    link.href = board.toDataURL()
+
+    if (!transparent) {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = board.width;
+        tempCanvas.height = board.height;
+        tempCanvasContext = tempCanvas.getContext('2d');
+        tempCanvasContext.fillStyle = localStorage.getItem('bcolor');
+        tempCanvasContext.fillRect(0, 0, board.width, board.height);
+        tempCanvasContext.drawImage(board, 0, 0);
+        link.href = tempCanvas.toDataURL();
+        link.click();
+        return
+    }
+
+    link.href = board.toDataURL();
     link.click();
 }
 /* Menu handling. */
@@ -169,6 +183,9 @@ const menuItem = (e) => {
     // download menu
     if (type == 'download') {
         downland();
+    }
+    if (type == 'download-transparent') {
+        downland(true);
     }
     // about menu
     if (type == "about") {
