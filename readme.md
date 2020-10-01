@@ -74,7 +74,7 @@ The app is tested in the following mentioned browsers.
 | Firefox | v79 | v68|
 | Opera | v70 | v59 |
 | EDGE | v84 | v45 |
-| Safari | v14 | ... |
+| Safari | v14 | v13 |
 
 ## Contributions 
 There is still a lot of work to do, so feel free to contribute to open `PR` 
