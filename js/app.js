@@ -155,6 +155,11 @@ const downland = () => {
     const locale = new Date().toLocaleString();
     const filename = `board${locale}.png`;
     link.download = filename;
+
+    ctx.globalCompositeOperation="destination-over";
+    ctx.fillStyle = localStorage.getItem("bcolor");
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
     link.href = board.toDataURL()
     link.click();
 }
