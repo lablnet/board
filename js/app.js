@@ -155,6 +155,7 @@ const downland = () => {
     const locale = new Date().toLocaleString();
     const filename = `board${locale}.png`;
     link.download = filename;
+
     link.href = board.toDataURL()
     link.click();
 }
@@ -170,6 +171,16 @@ const menuItem = (e) => {
     if (type == 'download') {
         downland();
     }
+
+    // download menu
+    if (type == 'download-with-bg') {
+        ctx.globalCompositeOperation="destination-over";
+        ctx.fillStyle = localStorage.getItem("bcolor");
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        downland();
+    }
+
     // about menu
     if (type == "about") {
         title.innerHTML = "About";
