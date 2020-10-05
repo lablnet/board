@@ -5,6 +5,10 @@
 Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.  
   
 ## Features
+ ### v1.1.0
+ - [x] Undo and Redo
+ - [x] Export image with background/ without background
+
  ### V1.0.0
 - [x] Standalone.  
 - [x] Draw on screen.  
