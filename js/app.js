@@ -1,3 +1,4 @@
+const pathsInstance = new Paths();
 // Progressive app
 if (debug === false) {
     window.onload = () => {
@@ -49,12 +50,25 @@ window.addEventListener('load', () => {
         return false;
     });
     // get position for menu.
-    const setMenuPosition =  ({ top, left }) => {
+    const setMenuPosition = ({
+        top,
+        left
+    }) => {
         menu.style.left = `${left}px`;
         menu.style.top = `${top}px`;
+        checkVisiableUndoAndRebo();
         toggleMenu("show");
         menuVisible = true;
     };
+
+    const checkVisiableUndoAndRebo = () => {
+        const havePath = !!(pathsInstance.paths.length);
+        const haveUndoStack = !!(pathsInstance.undoStack.length);
+        const itemUndo = document.getElementById('undo');
+        const itemRedo = document.getElementById('redo');
+        itemUndo.style.display = havePath ? 'block' : 'none';
+        itemRedo.style.display = haveUndoStack ? 'block' : 'none';
+    }
 
     // handle mouse events.
     document.addEventListener('mousedown', startDraw);
@@ -70,7 +84,7 @@ window.addEventListener('load', () => {
         }
     });
     // handle event for clear all.
-    document.onkeydown =  (e) => {
+    document.onkeydown = (e) => {
         // clear on ctrl + x.
         if (e.ctrlKey && e.keyCode === 88) {
             localStorage.removeItem("board");
@@ -108,7 +122,7 @@ window.addEventListener('load', () => {
             }
         }
     });
-
+    document.addEventListener('keydown', handleKeydown);
 });
 
 /* Set default parameters. */
@@ -125,7 +139,10 @@ const refactor = () => {
 }
 refactor();
 /* Default variables. */
-let coordinate = {x: 0, y: 0};
+let coordinate = {
+    x: 0,
+    y: 0
+};
 let draw = false;
 
 // get board.
@@ -138,7 +155,7 @@ const modal = document.getElementById("modal");
 const close = document.getElementsByClassName("close")[0];
 
 // close modal.
-close.onclick = function() {
+close.onclick = function () {
     modal.style.display = "none";
     document.getElementById("about").style.display = 'none';
     document.getElementById("help").style.display = 'none';
@@ -174,7 +191,7 @@ const menuItem = (e) => {
 
     // download menu
     if (type == 'download-with-bg') {
-        ctx.globalCompositeOperation="destination-over";
+        ctx.globalCompositeOperation = "destination-over";
         ctx.fillStyle = localStorage.getItem("bcolor");
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -249,6 +266,16 @@ const menuItem = (e) => {
             }
         }
     }
+
+    if (type === "undo") {
+        pathsInstance.undoPath();
+        repaint();
+    }
+
+    if (type === "redo") {
+        pathsInstance.redoPath();
+        repaint();
+    }
 }
 
 /* Save to localStorage as image. */
@@ -273,7 +300,7 @@ const restoreFromLocalStorage = () => {
         // Get the image data, and decode it.
         let img = JSON.parse(localStorage.getItem("board"))['image'];
         var image = new Image();
-        image.onload = function() {
+        image.onload = function () {
             ctx.drawImage(image, 0, 0);
         };
         image.src = img;
@@ -286,7 +313,7 @@ const resize = () => {
     ctx.canvas.height = window.innerHeight;
 
     // If window is full screen
-    if((window.fullScreen) ||
+    if ((window.fullScreen) ||
         (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
         ctx.canvas.width = window.screen.width;
         ctx.canvas.height = window.screen.height;
@@ -305,6 +332,7 @@ const position = (e) => {
 /* Start the drawing. */
 const startDraw = (e) => {
     draw = true;
+    pathsInstance.addNewPath();
     // update the position.
     position(e);
 }
@@ -312,6 +340,7 @@ const startDraw = (e) => {
 /* End the drawing. */
 const endDraw = () => {
     draw = false;
+    pathsInstance.clearLastEmptyRecode();
 }
 
 /* drawing */
@@ -335,19 +364,65 @@ const middleDraw = (e, color = localStorage.getItem("fcolor"), width = localStor
 
     // move the cursor accordingly the position of mouse or touch.
     ctx.moveTo(coordinate.x, coordinate.y);
+    pathsInstance.addDataToLastPath(coordinate);
     // update the position as we move around.
     position(e);
     // mark position of line
-    ctx.lineTo(coordinate.x , coordinate.y);
+    ctx.lineTo(coordinate.x, coordinate.y);
 
     // Finally, draws the line.
     ctx.stroke();
+    pathsInstance.clearUndoStack();
+    pathsInstance.addDataToLastPath(coordinate);
 
     /*
-    * Save it real time cause performance issue in some browser like in firefox.
-    * So i think it will be better if we provide save button,
-    * upon press we save it.
-    */
+     * Save it real time cause performance issue in some browser like in firefox.
+     * So i think it will be better if we provide save button,
+     * upon press we save it.
+     */
     //saveToLocalStorage()
     return;
+}
+
+const resetCanvas = () => {
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+const repaint = () => {
+    resetCanvas();
+    const paths = pathsInstance.paths;
+    paths.forEach(({
+        width,
+        color,
+        paths
+    }) => {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.strokeStyle = color;
+        ctx.moveTo(paths[0].x, paths[0].y);
+
+        paths.forEach(({
+            x,
+            y
+        }) => {
+            ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+    });
+}
+
+const handleKeydown = (event) => {
+    const isUndo = (event.ctrlKey || event.metaKey) && event.code === 'KeyZ' && !event.shiftKey;
+    const isRedo = (event.ctrlKey || event.metaKey) && event.code === 'KeyZ' && event.shiftKey;
+    if (isUndo) {
+        const path = pathsInstance.undoPath();
+        if (path && !path.paths.length) return;
+    }
+    if (isRedo) {
+        const path = pathsInstance.redoPath();
+        if (path && !path.paths.length) return;
+    }
+    if (isUndo || isRedo) {
+        repaint();
+    }
 }
