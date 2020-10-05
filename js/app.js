@@ -50,12 +50,25 @@ window.addEventListener('load', () => {
         return false;
     });
     // get position for menu.
-    const setMenuPosition =  ({ top, left }) => {
+    const setMenuPosition = ({
+        top,
+        left
+    }) => {
         menu.style.left = `${left}px`;
         menu.style.top = `${top}px`;
+        checkVisiableUndoAndRebo();
         toggleMenu("show");
         menuVisible = true;
     };
+
+    const checkVisiableUndoAndRebo = () => {
+        const havePath = !!(pathsInstance.paths.length);
+        const haveUndoStack = !!(pathsInstance.undoStack.length);
+        const itemUndo = document.getElementById('undo');
+        const itemRedo = document.getElementById('redo');
+        itemUndo.style.display = havePath ? 'block' : 'none';
+        itemRedo.style.display = haveUndoStack ? 'block' : 'none';
+    }
 
     // handle mouse events.
     document.addEventListener('mousedown', startDraw);
@@ -126,7 +139,10 @@ const refactor = () => {
 }
 refactor();
 /* Default variables. */
-let coordinate = {x: 0, y: 0};
+let coordinate = {
+    x: 0,
+    y: 0
+};
 let draw = false;
 
 // get board.
@@ -250,6 +266,16 @@ const menuItem = (e) => {
             }
         }
     }
+
+    if (type === "undo") {
+        pathsInstance.undoPath();
+        repaint();
+    }
+
+    if (type === "redo") {
+        pathsInstance.redoPath();
+        repaint();
+    }
 }
 
 /* Save to localStorage as image. */
@@ -350,16 +376,39 @@ const middleDraw = (e, color = localStorage.getItem("fcolor"), width = localStor
     pathsInstance.addDataToLastPath(coordinate);
 
     /*
-    * Save it real time cause performance issue in some browser like in firefox.
-    * So i think it will be better if we provide save button,
-    * upon press we save it.
-    */
+     * Save it real time cause performance issue in some browser like in firefox.
+     * So i think it will be better if we provide save button,
+     * upon press we save it.
+     */
     //saveToLocalStorage()
     return;
 }
 
 const resetCanvas = () => {
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+const repaint = () => {
+    resetCanvas();
+    const paths = pathsInstance.paths;
+    paths.forEach(({
+        width,
+        color,
+        paths
+    }) => {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.strokeStyle = color;
+        ctx.moveTo(paths[0].x, paths[0].y);
+
+        paths.forEach(({
+            x,
+            y
+        }) => {
+            ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+    });
 }
 
 const handleKeydown = (event) => {
@@ -374,25 +423,6 @@ const handleKeydown = (event) => {
         if (path && !path.paths.length) return;
     }
     if (isUndo || isRedo) {
-        resetCanvas();
-        const paths = pathsInstance.paths;
-        paths.forEach(({
-            width,
-            color,
-            paths
-        }) => {
-            ctx.beginPath();
-            ctx.lineWidth = width;
-            ctx.strokeStyle = color;
-            ctx.moveTo(paths[0].x, paths[0].y);
-
-            paths.forEach(({
-                x,
-                y
-            }) => {
-                ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-        });
+        repaint();
     }
 }
