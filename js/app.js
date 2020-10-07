@@ -7,7 +7,7 @@ if (debug === false) {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker
                 .register('./pwa.js').then(reg => {
-                    // Trigger this after your timeout
+                    // Trigger this after timeout
                     reg.update();
                 });
         }
