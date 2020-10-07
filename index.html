@@ -12,9 +12,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="board">
     <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta http-equiv="pragma" content="no-cache">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <script>
+        function importJs(js) {
+            let element = document.createElement("script");
+            element.setAttribute("charset", "utf-8");
+            element.setAttribute("src", `./js/${js}.js?t=${new Date().getTime()}`);
+            document.getElementsByTagName("footer")[0].appendChild(element);
+        }
+    </script>
 </head>
 <body>
 <div id="first">
@@ -114,10 +123,12 @@
     </div>
 </div>
 </body>
+<footer></footer>
+
 <script src="config.js"></script>
-<script src="./js/undo.js" charset="utf-8"></script>
-<script src="./js/app.js" charset="utf-8"></script>
 <script>
     document.getElementById("first").style.display = "none";
+    importJs("undo");
+    importJs("app");
 </script>
 </html>
