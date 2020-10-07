@@ -1,10 +1,11 @@
 var cacheName = 'lablnet-board-pwa';
+let timestamp = new Date().getTime();
 var filesToCache = [
     '/board/',
     '/board/index.html',
-    '/board/config.js',
-    '/board/css/app.min.css',
-    '/board/js/app.min.js'
+    `/board/config.js?t=${timestamp}`,
+    `/board/css/app.css?t=${timestamp}`,
+    `/board/js/app.js?t=${timestamp}`
 ];
 
 /* Start the service worker and cache all of the app's content */
