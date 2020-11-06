@@ -38,7 +38,7 @@ Pull from docker
 `docker push lablnet/board`
 
 Run the container
-`docker run --name board -d -p 9090:9090 board:1.1`
+`docker run --name board -d -p 9090:9090 lablnet/board:1.1`
 
 ## Build With Docker
   Clone this
