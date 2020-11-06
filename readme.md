@@ -27,14 +27,16 @@ Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.
 - [x] Download as image.  
   
 ## Install
-  1. Clone this
+  Clone this `git clone -b 1.1.0 https://github.com/Lablnet/board.git`
   
-		`git clone -b 1.1.0 https://github.com/Lablnet/board.git`
-		
-  2. There we go, its installed there is no other thing is necessary.
+  Install require dependencies `npm i`
+  
+  run the server `node server.js`
+  
  ## Install With Docker
 Pull from docker
 `docker push lablnet/board`
+
 Run the container
 `docker run --name board -d -p 9090:9090 board:1.1`
 
@@ -43,10 +45,16 @@ Run the container
   `git clone -b 1.1.0 https://github.com/Lablnet/board.git`
 
 Run the following commands.
+
 `$ cd board`
+
 `$ chmod +x ./build.sh`
+
 `$ ./build.sh`
+
 You have done it.
+
+
  ## Configuration
  The config file contain few configuration
  
