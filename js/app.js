@@ -96,9 +96,12 @@ window.addEventListener('load', () => {
     };
 
     // handle touch events.
-    document.addEventListener('touchstart', startDraw);
-    document.addEventListener('touchend', endDraw);
+    document.addEventListener('touchstart', startDraw, {passive: false});
+    document.addEventListener('touchend', endDraw, {passive: false});
     window.addEventListener("touchmove", (e) => {
+        // #15 Disable swipe to go back in chrome
+        e.preventDefault();
+
         // Do not draw if menu is visible.
         if (!menuVisible) {
             // erase on double tap.
@@ -124,7 +127,7 @@ window.addEventListener('load', () => {
                 resize();
             }
         }
-    });
+    }, {passive: false});
     document.addEventListener('keydown', handleKeydown);
 });
 
@@ -334,6 +337,8 @@ const position = (e) => {
 
 /* Start the drawing. */
 const startDraw = (e) => {
+    e.preventDefault();
+
     draw = true;
     pathsInstance.addNewPath();
     // update the position.
@@ -341,7 +346,9 @@ const startDraw = (e) => {
 }
 
 /* End the drawing. */
-const endDraw = () => {
+const endDraw = (e) => {
+    e.preventDefault();
+
     draw = false;
     pathsInstance.clearLastEmptyRecode();
 }
