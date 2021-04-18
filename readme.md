@@ -2,6 +2,9 @@
 Simple, standalone, flexible and very lightweight board app/PWA in JavaScript.  
   
 ## Features
+ ### v1.2.0
+  - [x] Disable swipe to go back in chrome #15
+
  ### v1.1.0
  - [x] Added local server
 -  [x] Dockerize
