@@ -80,6 +80,8 @@ You have done it.
   
   `js/app.js`  => Main core JavaScript file.
   
+  `js/undo.js`  => JavaScript file to handle undo/redo logic.
+  
   `browserconfig.xml` Config file for EDGE browsers.
   
   `index.html`  => HTML file of app.
