@@ -204,6 +204,10 @@ const menuItem = (e) => {
         downland();
     }
 
+    if(type === 'download-pdf'){
+        
+    }
+
     // about menu
     if (type == "about") {
         title.innerHTML = "About";
