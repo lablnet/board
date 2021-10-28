@@ -206,8 +206,12 @@ const menuItem = (e) => {
         downland();
     }
 
+    // download as pdf
     if(type === 'download-pdf'){
-        const doc = new jsPDF()
+        const doc = new jsPDF("l" , "mm" , "a3"); // Lanscape orientation , mm measurement and a3 paper size
+        doc.addImage(board.toDataURL("image/jpeg" , 1.0) , 'JPEG' , 0 , 0  );
+        const locale = new Date().toLocaleString();
+        doc.save(`board${locale}.pdf`);
     }
 
     // about menu
