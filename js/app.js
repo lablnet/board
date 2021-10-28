@@ -1,4 +1,6 @@
 const pathsInstance = new Paths();
+const {jsPDF} = window.jspdf;
+
 // Progressive app
 if (debug === false) {
     window.onload = () => {
@@ -205,7 +207,7 @@ const menuItem = (e) => {
     }
 
     if(type === 'download-pdf'){
-        
+        const doc = new jsPDF()
     }
 
     // about menu
