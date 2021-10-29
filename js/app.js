@@ -1,4 +1,6 @@
 const pathsInstance = new Paths();
+const {jsPDF} = window.jspdf;
+
 // Progressive app
 if (debug === false) {
     window.onload = () => {
@@ -202,6 +204,14 @@ const menuItem = (e) => {
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
         downland();
+    }
+
+    // download as pdf
+    if(type === 'download-pdf'){
+        const doc = new jsPDF("l" , "mm" , "a3"); // Lanscape orientation , mm measurement and a3 paper size
+        doc.addImage(board.toDataURL("image/jpeg" , 1.0) , 'JPEG' , 0 , 0  );
+        const locale = new Date().toLocaleString();
+        doc.save(`board${locale}.pdf`);
     }
 
     // about menu
